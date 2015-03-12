@@ -26,13 +26,20 @@ var checkSignature = function(signature, timestamp, nonce, echostr, cb) {
 
 // 接收普通消息
 var receiveMessage = function(msg, cb) {
+  var frmUser = msg.xml.FromUserName[0];
+  var msgCont = "";
+  AV.Cloud.run('hello', {name: frmUser}, {
+    success: function(data){msgCont = data},
+    error: function(err){ msgCont = err}
+  })
+  
   var result = {
     xml: {
       ToUserName: msg.xml.FromUserName[0],
       FromUserName: '' + msg.xml.ToUserName + '',
       CreateTime: new Date().getTime(),
       MsgType: 'text',
-      Content: '你好，你发的内容是「' + msg.xml.Content + '」。'
+      Content: msgCont + '，你发的内容是「' + msg.xml.Content + '」。'
     }
   }
   cb(null, result);
