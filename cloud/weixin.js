@@ -26,7 +26,7 @@ var checkSignature = function(signature, timestamp, nonce, echostr, cb) {
 
 // 接收普通消息
 var receiveMessage = function(msg, cb) {
-  var frmUser = msg.xml.FromUserName[0];
+  var frmUser = msg.xml.ToUserName;
   var msgCont = "";
   AV.Cloud.run('hello', {name: frmUser}, {
     success: function(data){msgCont = data},
