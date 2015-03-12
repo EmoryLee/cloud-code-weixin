@@ -1,3 +1,3 @@
 module.exports = {
-  token: 'yourToken'
+  token: 'Since2013WeiXinDeveloperAccount1102'
 }
